@@ -27,26 +27,24 @@ for (let i = 0; i < 22; i++) {
 const cover = document.getElementById("cover");
 const bless = document.getElementById("bless");
 const ring = document.getElementById("ring");
-const AC = window.AudioContext || window.webkitAudioContext;
-const actx = new AC();
-const gain = actx.createGain();
-gain.gain.value = 0.7;
-gain.connect(actx.destination);
-let buf1, buf2;
-Promise.all(["audio1.m4a", "audio2.mp3"].map(n => fetch(n).then(r => r.arrayBuffer()).then(d => actx.decodeAudioData(d))))
-  .then(b => { buf1 = b[0]; buf2 = b[1]; }).catch(() => {});
-function playMusic() {
-  actx.resume();
-  if (!buf1 || !buf2) {
-    const a = new Audio("audio1.m4a"), b = new Audio("audio2.mp3");
-    b.loop = true; a.volume = b.volume = 0.7;
-    a.addEventListener("ended", () => b.play().catch(() => {}));
-    a.play().catch(() => {});
-    return;
+const bgm = document.getElementById("bgm");
+let stage = 1;
+
+// When the intro ends, switch the SAME element to track 2 and loop it
+bgm.addEventListener("ended", () => {
+  if (stage === 1) {
+    stage = 2;
+    bgm.src = "audio2.mp3";
+    bgm.loop = true;
+    bgm.play().catch(e => console.log(e));
   }
-  const t = actx.currentTime + 0.05;
-  const s1 = actx.createBufferSource(); s1.buffer = buf1; s1.connect(gain); s1.start(t);
-  const s2 = actx.createBufferSource(); s2.buffer = buf2; s2.loop = true; s2.connect(gain); s2.start(t + buf1.duration);
+});
+
+// Temporary debugging (remove once it works)
+bgm.addEventListener("error", () => alert("Audio error code: " + (bgm.error && bgm.error.code)));
+
+function playMusic() {
+  bgm.play().catch(e => alert("Play blocked: " + e.name));
 }
 document.getElementById("seal").addEventListener("click", () => {
   playMusic();                       // music starts the moment the seal is tapped
