@@ -240,7 +240,7 @@ body:not(.locked) .fh { animation:heart 3.4s infinite; }
 .rows small { display:block; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--wine); line-height:1.3; }
 .rows b { display:block; font:500 1.02rem/1.35 'Jost',sans-serif; color:var(--ink); }
 .cal { display:flex; align-items:center; justify-content:center; gap:.6rem; margin:.9rem 4px 0; padding:.85rem; border-radius:40px; background:var(--lilac-d); color:var(--navy); text-decoration:none; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; transition:.25s; }
-.cal svg,.dir svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; }
+.cal svg,.dir svg,.dirlink svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; }
 .cal:hover,.cal:focus-visible { background:var(--navy); color:#fff; outline:none; }
 
 /* ---------- map card ---------- */
@@ -463,9 +463,3 @@ body { background:var(--dk); }
 
 /* give the calligraphy S room so its swash is not clipped */
 .names { padding-top:.3em; padding-bottom:.08em; }
-
-.rows .maprow { padding:0; }
-.rows .dirlink { display:flex; align-items:center; gap:.85rem; width:100%; padding:.65rem .85rem; color:var(--navy); text-decoration:none; border-radius:16px; transition:.25s; }
-.rows .dirlink b { color:inherit; text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px; }
-.rows .dirlink:hover,.rows .dirlink:focus-visible { background:var(--navy); color:#fff; outline:none; }
-.rows .dirlink:hover .ico,.rows .dirlink:focus-visible .ico { border-color:var(--gold); }
