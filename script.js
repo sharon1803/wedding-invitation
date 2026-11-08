@@ -70,7 +70,8 @@ setInterval(tick, 1000);
 // 6. Maps: each event card has data-place="..." (the map, directions and calendar location come from it)
 document.querySelectorAll(".ecard").forEach(card => {
   const place = card.dataset.place;
-  card.querySelector(".dirlink").href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(place);
+  const dl = card.querySelector(".dirlink");
+  if (dl) dl.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(place);
   const cal = card.querySelector(".cal");
   const url = new URL(cal.href);
   url.searchParams.set("location", place);
