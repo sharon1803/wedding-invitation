@@ -464,5 +464,8 @@ body { background:var(--dk); }
 /* give the calligraphy S room so its swash is not clipped */
 .names { padding-top:.3em; padding-bottom:.08em; }
 
-.rows .dirlink { color:var(--navy); text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px; }
-.rows .dirlink:hover,.rows .dirlink:focus-visible { color:var(--wine); outline:none; }
+.rows .maprow { padding:0; }
+.rows .dirlink { display:flex; align-items:center; gap:.85rem; width:100%; padding:.65rem .85rem; color:var(--navy); text-decoration:none; border-radius:16px; transition:.25s; }
+.rows .dirlink b { color:inherit; text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px; }
+.rows .dirlink:hover,.rows .dirlink:focus-visible { background:var(--navy); color:#fff; outline:none; }
+.rows .dirlink:hover .ico,.rows .dirlink:focus-visible .ico { border-color:var(--gold); }
