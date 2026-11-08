@@ -463,3 +463,6 @@ body { background:var(--dk); }
 
 /* give the calligraphy S room so its swash is not clipped */
 .names { padding-top:.3em; padding-bottom:.08em; }
+
+.rows .dirlink { color:var(--navy); text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px; }
+.rows .dirlink:hover,.rows .dirlink:focus-visible { color:var(--wine); outline:none; }
