@@ -72,7 +72,7 @@ document.querySelectorAll(".ecard").forEach(card => {
   const place = card.dataset.place;
   const dl = card.querySelector(".dirlink");
   if (dl) dl.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(place);
-  const cal = card.querySelector(".cal");
+  const cal = card.querySelector(".cal:not(.dirlink)");
   const url = new URL(cal.href);
   url.searchParams.set("location", place);
   cal.href = url.toString();
