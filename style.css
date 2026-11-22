@@ -457,3 +457,36 @@ body { background:var(--dk); }
 
 /* give the calligraphy S room so its swash is not clipped */
 .names { padding-top:.3em; padding-bottom:.08em; }
+
+/* ===== RSVP footer (QR) ===== */
+.foot { padding:4.5rem 1.5rem 4rem; }
+.rsvp-title { font:400 clamp(2.3rem,9vw,3.4rem)/1.15 'Great Vibes',cursive; max-width:15ch; margin:1.2rem auto 1.6rem; color:var(--goldlt); }
+.qr-card { display:block; margin:0 auto; padding:16px; background:#fbf7ec; border:0; border-radius:14px; cursor:pointer; box-shadow:0 0 0 2px var(--gold),0 0 0 8px var(--dk2),0 0 0 9px var(--gold),0 12px 30px rgba(0,0,0,.35); transition:transform .25s; }
+.qr-card:hover,.qr-card:focus-visible { transform:scale(1.03); outline:none; }
+.qr-card svg { display:block; width:min(58vw,230px); height:auto; }
+.qr-card .qr-fallback { font:italic 1.1rem 'Cormorant Garamond',serif; color:#1d4a37; padding:2rem 1rem; display:block; }
+.foot .divider { margin:2.2rem auto 1rem; }
+.rsvp-scan { font:600 1rem/1.6 'Cinzel',serif; letter-spacing:.14em; text-transform:uppercase; color:#efe9d2; }
+
+.rsvp-modal { position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:1rem; background:rgba(8,33,26,.82); overflow-y:auto; }
+.rsvp-modal[hidden] { display:none; }
+.rsvp-box { position:relative; width:min(460px,100%); margin:auto; padding:2.6rem 1.6rem 2rem; text-align:center; background:radial-gradient(ellipse at 50% 0,#fbf7ec,var(--blush) 85%); color:var(--ink); border-radius:6px; box-shadow:0 0 0 2px var(--gold),0 20px 60px rgba(0,0,0,.5); animation:rsvpIn .45s cubic-bezier(.2,.8,.3,1) both; }
+.rsvp-box .c { width:44px; height:44px; }
+.rsvp-box h2 { font-size:2.6rem; color:var(--navy); }
+.rsvp-sub { font:italic 400 1.15rem 'Cormorant Garamond',serif; margin:.2rem 0 1.2rem; }
+.rsvp-x { position:absolute; top:.5rem; right:.8rem; z-index:2; background:none; border:0; font-size:2rem; line-height:1; color:var(--navy); cursor:pointer; }
+.rsvp-box form { text-align:left; display:grid; gap:1rem; }
+.rsvp-box label,.rsvp-box legend { display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--wine); }
+.rsvp-box input[type=text],.rsvp-box select,.rsvp-box textarea { display:block; width:100%; margin-top:.35rem; padding:.75rem .85rem; font:400 1rem 'Jost',sans-serif; letter-spacing:0; text-transform:none; color:var(--ink); background:#fff; border:1px solid var(--gold); border-radius:8px; }
+.rsvp-box input:focus,.rsvp-box select:focus,.rsvp-box textarea:focus { outline:2px solid var(--navy); outline-offset:1px; }
+.rsvp-box fieldset { border:0; padding:0; margin:0; display:grid; gap:.5rem; }
+.rsvp-box .pick { display:flex; align-items:center; gap:.7rem; padding:.7rem .85rem; background:#fff; border:1px solid var(--gold); border-radius:8px; cursor:pointer; letter-spacing:.06em; color:var(--navy); }
+.rsvp-box .pick:has(input:checked) { background:var(--navy); color:#fff; }
+.rsvp-box .pick input { accent-color:var(--gold); }
+.rsvp-err { color:#a02020; font-size:.9rem; }
+.rsvp-send { padding:.95rem; border:0; border-radius:40px; background:var(--navy); color:#fff; font:500 .85rem 'Jost',sans-serif; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; transition:.25s; }
+.rsvp-send:hover,.rsvp-send:focus-visible { background:var(--gold); color:var(--dk2); outline:none; }
+.rsvp-thanks { font:italic 500 1.4rem/1.5 'Cormorant Garamond',serif; color:var(--navy); padding:1rem 0; }
+body.rsvp-open { overflow:hidden; }
+@keyframes rsvpIn { from { opacity:0; transform:translateY(24px) scale(.97); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce) { .rsvp-box { animation:none; } .qr-card { transition:none; } }
