@@ -490,3 +490,7 @@ body { background:var(--dk); }
 body.rsvp-open { overflow:hidden; }
 @keyframes rsvpIn { from { opacity:0; transform:translateY(24px) scale(.97); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion:reduce) { .rsvp-box { animation:none; } .qr-card { transition:none; } }
+
+/* RSVP footer: no frame lines or corner ornaments (they clash with the edge wheels) */
+.foot::before { display:none; }
+.foot .c { display:none; }
