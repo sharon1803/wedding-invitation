@@ -116,7 +116,7 @@ for (let i = 0; i < (mobile ? 16 : 26); i++) {
 // 9. RSVP: footer QR code -> opens the RSVP form
 // ---- SETTINGS (edit these) -------------------------------------------------
 const RSVP_URL = "";        // optional: link the QR should open. Leave "" to use this site's own address + #rsvp
-const RSVP_WHATSAPP = "";   // optional: WhatsApp number with country code, e.g. "919876543210". "" lets the guest pick the chat
+const RSVP_WHATSAPP = "918437095207";   // optional: WhatsApp number with country code, e.g. "919876543210". "" lets the guest pick the chat
 const RSVP_ENDPOINT = "";   // optional: Google Apps Script / Formspree URL to collect replies. If set, replies go there instead of WhatsApp
 // -----------------------------------------------------------------------------
 const rsvpTarget = RSVP_URL || (location.origin + location.pathname + "#rsvp");
@@ -137,6 +137,10 @@ const rsvpModal = document.getElementById("rsvpModal");
 const rsvpForm = document.getElementById("rsvpForm");
 const rsvpThanks = document.getElementById("rsvpThanks");
 const rsvpErr = document.getElementById("rsvpErr");
+const arrivalInput = document.getElementById("arrivalDate");
+const pad = n => String(n).padStart(2, "0");
+const today = new Date();
+arrivalInput.min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;   // no past dates
 function openRsvp() {
   rsvpModal.hidden = false;
   document.body.classList.add("rsvp-open");
@@ -152,7 +156,8 @@ document.getElementById("rsvpClose").addEventListener("click", closeRsvp);
 rsvpModal.addEventListener("click", e => { if (e.target === rsvpModal) closeRsvp(); });
 addEventListener("keydown", e => { if (e.key === "Escape" && !rsvpModal.hidden) closeRsvp(); });
 rsvpForm.addEventListener("change", () => {
-  document.getElementById("guestsRow").style.display = rsvpForm.attend.value === "Joyfully accepts" ? "" : "none";
+  const going = rsvpForm.attend.value === "Joyfully accepts";
+  ["guestsRow", "arrivalRow"].forEach(id => document.getElementById(id).style.display = going ? "" : "none");
 });
 rsvpForm.addEventListener("submit", async e => {
   e.preventDefault();
@@ -161,12 +166,14 @@ rsvpForm.addEventListener("submit", async e => {
   rsvpErr.hidden = !!name;
   if (!name) return;
   const going = f.get("attend") === "Joyfully accepts";
+  const arrivalRaw = (f.get("arrival") || "").toString();
+  const arrival = arrivalRaw ? new Date(arrivalRaw + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "";
   const msg = (f.get("msg") || "").toString().trim();
   const text = `RSVP - Satarupa & Rohan's wedding (11 Feb 2027)\nName: ${name}\nReply: ${f.get("attend")}` +
-    (going ? `\nGuests: ${f.get("guests")}` : "") + (msg ? `\nMessage: ${msg}` : "");
+    (going ? `\nGuests: ${f.get("guests")}` : "") + (going && arrival ? `\nDate of arrival: ${arrival}` : "") + (msg ? `\nMessage: ${msg}` : "");
   if (RSVP_ENDPOINT) {
     try {
-      await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams({ name, attend: f.get("attend"), guests: going ? f.get("guests") : "0", message: msg }) });
+      await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams({ name, attend: f.get("attend"), guests: going ? f.get("guests") : "0", arrival: going ? arrivalRaw : "", message: msg }) });
     } catch (err) { console.log(err); }
   } else {
     window.open(`https://wa.me/${RSVP_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
