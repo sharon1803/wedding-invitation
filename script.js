@@ -176,7 +176,12 @@ rsvpForm.addEventListener("submit", async e => {
       await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams({ name, attend: f.get("attend"), guests: going ? f.get("guests") : "0", arrival: going ? arrivalRaw : "", message: msg }) });
     } catch (err) { console.log(err); }
   } else {
-    window.open(`https://wa.me/${RSVP_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    const phone = RSVP_WHATSAPP.replace(/\D/g, "");
+    const isPhone = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    // phones: wa.me opens the chat in the WhatsApp app; computers: WhatsApp Web opens the chat with this number directly
+    const waLink = (isPhone ? "https://wa.me/" + phone + "?text=" : "https://web.whatsapp.com/send?phone=" + phone + "&text=") + encodeURIComponent(text);
+    document.getElementById("rsvpWa").href = waLink;
+    window.open(waLink, "_blank", "noopener");
   }
   rsvpForm.hidden = true;
   rsvpThanks.hidden = false;
