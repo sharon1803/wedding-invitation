@@ -2,7 +2,7 @@
 document.querySelectorAll(".blush, .ivory").forEach(sec => {
   ["p1", "p2", "p3", "p4"].forEach(p => sec.insertAdjacentHTML("afterbegin", `<svg class="paisley ${p}"><use href="#paisley"/></svg>`));
 });
-document.querySelectorAll(".blush, .ivory, .dark").forEach(sec => {
+document.querySelectorAll(".blush, .ivory, .dark, .foot").forEach(sec => {
   sec.insertAdjacentHTML("afterbegin", '<svg class="spin edge-mandala em-l"><use href="#mandala"/></svg><svg class="spin edge-mandala em-r"><use href="#mandala"/></svg>');
 });
 document.querySelectorAll(".frame").forEach(box => {
