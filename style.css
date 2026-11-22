@@ -477,7 +477,7 @@ body { background:var(--dk); }
 .rsvp-x { position:absolute; top:.5rem; right:.8rem; z-index:2; background:none; border:0; font-size:2rem; line-height:1; color:var(--navy); cursor:pointer; }
 .rsvp-box form { text-align:left; display:grid; gap:1rem; }
 .rsvp-box label,.rsvp-box legend { display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--wine); }
-.rsvp-box input[type=text],.rsvp-box select,.rsvp-box textarea { display:block; width:100%; margin-top:.35rem; padding:.75rem .85rem; font:400 1rem 'Jost',sans-serif; letter-spacing:0; text-transform:none; color:var(--ink); background:#fff; border:1px solid var(--gold); border-radius:8px; }
+.rsvp-box input[type=text],.rsvp-box input[type=date],.rsvp-box select,.rsvp-box textarea { display:block; width:100%; margin-top:.35rem; padding:.75rem .85rem; font:400 1rem 'Jost',sans-serif; letter-spacing:0; text-transform:none; color:var(--ink); background:#fff; border:1px solid var(--gold); border-radius:8px; }
 .rsvp-box input:focus,.rsvp-box select:focus,.rsvp-box textarea:focus { outline:2px solid var(--navy); outline-offset:1px; }
 .rsvp-box fieldset { border:0; padding:0; margin:0; display:grid; gap:.5rem; }
 .rsvp-box .pick { display:flex; align-items:center; gap:.7rem; padding:.7rem .85rem; background:#fff; border:1px solid var(--gold); border-radius:8px; cursor:pointer; letter-spacing:.06em; color:var(--navy); }
@@ -494,3 +494,4 @@ body.rsvp-open { overflow:hidden; }
 /* RSVP footer: no frame lines or corner ornaments (they clash with the edge wheels) */
 .foot::before { display:none; }
 .foot .c { display:none; }
+.rsvp-box input[type=date] { min-height:46px; appearance:none; -webkit-appearance:none; }
