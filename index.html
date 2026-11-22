@@ -347,20 +347,44 @@
 
   
 
-  <footer class="foot frame">
+  <footer class="foot frame" id="rsvp-section">
     <svg class="spin foot-mandala"><use href="#mandala"/></svg>
+    <h2 class="rsvp-title">Eagerly waiting to celebrate with you!</h2>
+    <button type="button" class="qr-card" id="qrBtn" aria-label="Open the RSVP form">
+      <span id="qr" aria-hidden="true"></span>
+    </button>
     <svg class="divider"><use href="#divider"/></svg>
-    <div class="monogram"><svg class="spin"><use href="#mandala"/></svg><span>S&amp;R</span></div>
-    <p class="script">With love</p>
-    <p class="foot-names">Satarupa <i>&amp;</i> Rohan</p>
-    <p class="foot-line">We can't wait to celebrate with you</p>
-    <svg class="divider"><use href="#divider"/></svg>
-    
+    <p class="rsvp-scan">Please scan the<br>QR code to RSVP</p>
   </footer>
+
+  <div class="rsvp-modal" id="rsvpModal" role="dialog" aria-modal="true" aria-labelledby="rsvpHead" hidden>
+    <div class="rsvp-box frame">
+      <button type="button" class="rsvp-x" id="rsvpClose" aria-label="Close">&times;</button>
+      <p class="script">Kindly reply</p>
+      <h2 id="rsvpHead">RSVP</h2>
+      <p class="rsvp-sub">Satarupa &amp; Rohan &middot; 11 February 2027</p>
+      <form id="rsvpForm" novalidate>
+        <label>Your name<input name="name" type="text" autocomplete="name" required placeholder="Full name"></label>
+        <fieldset>
+          <legend>Will you attend?</legend>
+          <label class="pick"><input type="radio" name="attend" value="Joyfully accepts" checked><span>Joyfully accept</span></label>
+          <label class="pick"><input type="radio" name="attend" value="Regretfully declines"><span>Regretfully decline</span></label>
+        </fieldset>
+        <label id="guestsRow">Number of guests (including you)
+          <select name="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+        </label>
+        <label>Message for the couple (optional)<textarea name="msg" rows="3" placeholder="Your wishes"></textarea></label>
+        <p class="rsvp-err" id="rsvpErr" hidden>Please enter your name.</p>
+        <button type="submit" class="rsvp-send">Send RSVP</button>
+      </form>
+      <p class="rsvp-thanks" id="rsvpThanks" hidden>Thank you! Your reply has been sent.<br>We can't wait to celebrate with you.</p>
+    </div>
+  </div>
   <div class="band"></div>
 
    <audio id="bgm" src="music.mp3" preload="auto" playsinline></audio>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
