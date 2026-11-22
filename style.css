@@ -495,3 +495,4 @@ body.rsvp-open { overflow:hidden; }
 .foot::before { display:none; }
 .foot .c { display:none; }
 .rsvp-box input[type=date] { min-height:46px; appearance:none; -webkit-appearance:none; }
+.rsvp-wa { display:inline-block; margin-top:1rem; padding:.85rem 1.6rem; text-decoration:none; font-size:.8rem; }
